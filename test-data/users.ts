@@ -1,5 +1,6 @@
 import '../config/env' // 👈 FORCE dotenv to load first
-import { ENV } from '../config/env'
+import { getEcommerceEnv } from '../config/env'
+const ENV = getEcommerceEnv()
 
 export const USERS = {
   standard: {

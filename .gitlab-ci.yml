@@ -14,13 +14,12 @@ default:
       - node_modules/
 
 variables:
-  DOMAIN: ecommerce
   ENV: qa
   CI: 'true'
   npm_config_cache: $CI_PROJECT_DIR/.npm
 
 # ─────────────────────────────────────────────────────────────
-# Lint, format and typecheck (cheap and fast — fail early).
+# Lint, format and typecheck.
 # ─────────────────────────────────────────────────────────────
 lint:
   stage: lint
@@ -33,15 +32,11 @@ lint:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
-# ─────────────────────────────────────────────────────────────
-# Test matrix: one job per browser. Allure raw results are kept
-# as artifacts so the `pages` stage can merge and publish them.
-# ─────────────────────────────────────────────────────────────
 .test-template: &test-template
   stage: test
   script:
     - npm ci --prefer-offline --no-audit
-    - npx playwright test --project=$BROWSER
+    - npx playwright test --project=$PROJECT
   artifacts:
     when: always
     expire_in: 14 days
@@ -55,32 +50,22 @@ lint:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
-test:chromium:
+test:ecommerce:
   <<: *test-template
   variables:
-    BROWSER: chromium
+    PROJECT: ecommerce
 
-test:firefox:
+test:airline:
   <<: *test-template
   variables:
-    BROWSER: firefox
+    PROJECT: airline
 
-test:webkit:
-  <<: *test-template
-  variables:
-    BROWSER: webkit
-
-# ─────────────────────────────────────────────────────────────
-# Generate a single Allure report from all browser jobs.
-# ─────────────────────────────────────────────────────────────
 allure:report:
   stage: report
   needs:
-    - job: test:chromium
+    - job: test:ecommerce
       artifacts: true
-    - job: test:firefox
-      artifacts: true
-    - job: test:webkit
+    - job: test:airline
       artifacts: true
   script:
     - npm ci --prefer-offline --no-audit
@@ -90,23 +75,5 @@ allure:report:
     expire_in: 30 days
     paths:
       - allure-report/
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-
-# ─────────────────────────────────────────────────────────────
-# Publish the Allure report to GitLab Pages.
-# After a successful pipeline on the default branch the report
-# is reachable at https://<group>.gitlab.io/<project>/
-# ─────────────────────────────────────────────────────────────
-pages:
-  stage: pages
-  needs:
-    - allure:report
-  script:
-    - mv allure-report public
-  artifacts:
-    paths:
-      - public
-    expire_in: 30 days
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

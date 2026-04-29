@@ -1,22 +1,14 @@
 import { defineConfig, devices } from '@playwright/test'
-import { ENV } from './config/env'
 import path from 'path'
 
 /**
  * Playwright configuration.
  *
- * Defaults:
- * - Headless on CI, headed locally (override with --headed / HEADED=1)
- * - Parallel everywhere; bring down to 1 worker only when debugging
- * - Retries: 2 on CI, 0 locally
- * - Reporters: list + html (built-in) + allure (rich reporting)
- * - Multi-browser: chromium by default; firefox/webkit via npm scripts or --project
- *
- * Run examples:
- *   npm test                          # all projects
- *   npm run test:chromium             # chromium only
- *   npm run smoke:qa                  # @smoke tests on ecommerce/qa
- *   DOMAIN=airline ENV=qa npm test    # explicit env
+ * Projects represent business domains, not browsers. Each project has its own
+ * testDir and is loaded with its own environment config. Run with:
+ *   npx playwright test --project=ecommerce
+ *   npx playwright test --project=airline
+ *   npx playwright test                       # runs all projects
  */
 export default defineConfig({
   testDir: './tests',
@@ -40,7 +32,6 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: ENV.baseURL,
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     headless: !process.env.HEADED,
@@ -59,20 +50,26 @@ export default defineConfig({
       name: 'api',
       testDir: './tests/api',
       use: {
-        baseURL: ENV.apiBaseURL
+        baseURL: process.env.API_BASE_URL
       }
     },
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }
+      name: 'ecommerce',
+      testDir: './tests/ecommerce',
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: process.env.ECOMMERCE_BASE_URL
+      },
+      metadata: { domain: 'ecommerce' }
     },
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] }
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] }
+      name: 'airline',
+      testDir: './tests/airline',
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: process.env.AIRLINE_BASE_URL
+      },
+      metadata: { domain: 'airline' }
     }
   ]
 })

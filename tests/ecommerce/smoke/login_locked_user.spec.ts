@@ -1,6 +1,7 @@
 import { test, expect } from '../../../fixtures/ecommerceFixture'
 import { setLabels } from '../../../utils/helpers/allure'
-import { ENV } from '../../../config/env'
+import { getEcommerceEnv } from '../../../config/env'
+const ENV = getEcommerceEnv()
 
 test.describe('Authentication — locked user @smoke', () => {
   test('locked user sees an error and cannot log in', async ({ loginPage }) => {

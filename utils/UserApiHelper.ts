@@ -1,5 +1,5 @@
 import { APIRequestContext, expect } from '@playwright/test'
-import { ENV } from '../config/env'
+import { getAirlineEnv } from '../config/env'
 
 /**
  * API helper that targets reqres.in — a free public sandbox API.
@@ -17,6 +17,7 @@ export class UserApiHelper {
   private readonly apiKey?: string
 
   constructor(request: APIRequestContext) {
+    const ENV = getAirlineEnv()
     this.request = request
     this.baseURL = ENV.apiBaseURL ?? 'https://reqres.in/api'
     this.apiKey = ENV.apiKey
