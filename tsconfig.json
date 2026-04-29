@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "baseUrl": "./",
+    "rootDir": ".",
+    "paths": {
+      "@pages/*": ["pages/*"],
+      "@fixtures/*": ["fixtures/*"],
+      "@utils/*": ["utils/*"],
+      "@config/*": ["config/*"],
+      "@test-data/*": ["test-data/*"]
+    }
+  },
+  "include": ["**/*.ts", "playwright.config.ts", "global-setup.ts"],
+  "exclude": [
+    "node_modules",
+    "playwright-report",
+    "allure-report",
+    "allure-results",
+    "test-results"
+  ]
+}

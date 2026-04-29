@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# Run prettier + eslint --fix only on staged files. Fast and safe.
+npx lint-staged
