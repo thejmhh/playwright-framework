@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"430b6e2175fec01fd0a985e302c0d909","name":"E-commerce","statistic":{"failed":0,"broken":0,"skipped":0,"passed":5,"unknown":0,"total":5}},{"uid":"60fc636eb19445f2c4a4822de8619590","name":"Airline","statistic":{"failed":0,"broken":0,"skipped":0,"passed":3,"unknown":0,"total":3}}]}

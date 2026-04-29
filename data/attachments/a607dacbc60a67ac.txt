@@ -1,0 +1,5 @@
+[baseFixture] 4 uncaught page error(s) during test:
+  - a is not a function
+  - jQuery is not defined
+  - a is not a function
+  - jQuery is not defined
