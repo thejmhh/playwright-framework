@@ -33,10 +33,6 @@ export class HomePage {
     await this.findFlightsBtn.click()
   }
 
-  /**
-   * Clicks the "Travel The World" external link and returns the new Page
-   * (tab) once it opens.
-   */
   async clickCheckoutDestinationLink(): Promise<Page> {
     await this.checkoutDest.evaluate((el) => el.setAttribute('target', '_blank'))
     const pagePromise = this.page.context().waitForEvent('page')

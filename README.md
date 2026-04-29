@@ -24,7 +24,7 @@
 - 🔐 **Auth state caching** with `globalSetup` + `storageState` so most specs skip the login UI.
 - 🦊 **Cross-browser** matrix: Chromium, Firefox, WebKit.
 - 📊 **Allure reporting** with epics/features/stories/severity labels.
-- 🤖 **CI/CD on two platforms**: GitHub Actions *and* GitLab CI, both publish the Allure report to Pages.
+- 🤖 **CI/CD on two platforms**: GitHub Actions _and_ GitLab CI, both publish the Allure report to Pages.
 - 🧹 **Code quality**: ESLint flat config + Prettier + Husky pre-commit + lint-staged + TypeScript strict.
 
 ---
@@ -45,16 +45,16 @@
 
 ## Tech stack
 
-| Layer | Tool |
-|---|---|
-| Test runner | [Playwright Test](https://playwright.dev/) 1.42 |
-| Language | TypeScript 5 (strict mode) |
-| Reporting | Allure + HTML (built-in) + JUnit (for CI) |
-| Quality | ESLint 9 (flat config), Prettier 3, Husky 9, lint-staged 15 |
-| Config | dotenv, multi-env, multi-domain |
-| CI/CD | GitHub Actions, GitLab CI |
-| Sandbox APIs | [reqres.in](https://reqres.in) |
-| Sandbox UIs | [saucedemo.com](https://www.saucedemo.com), [blazedemo.com](https://blazedemo.com) |
+| Layer        | Tool                                                                               |
+| ------------ | ---------------------------------------------------------------------------------- |
+| Test runner  | [Playwright Test](https://playwright.dev/) 1.42                                    |
+| Language     | TypeScript 5 (strict mode)                                                         |
+| Reporting    | Allure + HTML (built-in) + JUnit (for CI)                                          |
+| Quality      | ESLint 9 (flat config), Prettier 3, Husky 9, lint-staged 15                        |
+| Config       | dotenv, multi-env, multi-domain                                                    |
+| CI/CD        | GitHub Actions, GitLab CI                                                          |
+| Sandbox APIs | [reqres.in](https://reqres.in)                                                     |
+| Sandbox UIs  | [saucedemo.com](https://www.saucedemo.com), [blazedemo.com](https://blazedemo.com) |
 
 ---
 
@@ -157,12 +157,12 @@ npm run test:debug
 
 ### Useful environment variables
 
-| Variable | Default | Description |
-|---|---|---|
+| Variable | Default     | Description                            |
+| -------- | ----------- | -------------------------------------- |
 | `DOMAIN` | `ecommerce` | `ecommerce`, `airline`, or `insurance` |
-| `ENV` | `qa` | Loads `config/.env.${ENV}` |
-| `HEADED` | unset | Set to `1` to disable headless mode |
-| `CI` | unset | When set, retries=2 and workers=50% |
+| `ENV`    | `qa`        | Loads `config/.env.${ENV}`             |
+| `HEADED` | unset       | Set to `1` to disable headless mode    |
+| `CI`     | unset       | When set, retries=2 and workers=50%    |
 
 ---
 
@@ -203,7 +203,7 @@ makes the dependency graph explicit.
 Login UI is exercised once per run (in `global-setup.ts`) and the resulting
 `storageState` is reused by every spec that declares
 `test.use({ storageState: 'storage/standard.json' })`. This shaves significant
-time off the suite and isolates *the auth flow itself* in dedicated smoke
+time off the suite and isolates _the auth flow itself_ in dedicated smoke
 specs that **don't** use the saved state.
 
 ### Why fail-fast on missing env vars?
@@ -245,22 +245,22 @@ image (`mcr.microsoft.com/playwright`) for the test stage in GitLab.
 
 ## Skills demonstrated
 
-| Capability | Where to look |
-|---|---|
-| Page Object Model | `pages/ecommerce/`, `pages/airline/` |
-| Custom fixtures (DI) | `fixtures/*.ts` |
-| Web-first locators (`getByRole`, `getByPlaceholder`) | `pages/ecommerce/LoginPage.ts` |
-| Web-first assertions (`expect(locator).toBeVisible()`) | every spec |
-| Data-driven testing | `tests/ecommerce/e2e/add_to_cart_data_driven.spec.ts` |
-| Network mocking | `pages/airline/HomePage.ts` (`mockFlightSearchError`) |
-| Multi-tab handling | `tests/.../new_tab.spec.ts`, airline tests |
-| Native dialogs | `tests/ecommerce/functional/alerts.spec.ts` |
-| API testing | `utils/UserApiHelper.ts`, airline API spec |
-| Auth state caching | `global-setup.ts` |
-| Multi-environment config | `config/env.ts` + `config/.env.*` |
-| Multi-browser CI matrix | `.github/workflows/`, `.gitlab-ci.yml` |
-| Allure reporting | `utils/helpers/allure.ts` |
-| Code quality automation | `eslint.config.js`, `.husky/`, `lint-staged` |
+| Capability                                             | Where to look                                         |
+| ------------------------------------------------------ | ----------------------------------------------------- |
+| Page Object Model                                      | `pages/ecommerce/`, `pages/airline/`                  |
+| Custom fixtures (DI)                                   | `fixtures/*.ts`                                       |
+| Web-first locators (`getByRole`, `getByPlaceholder`)   | `pages/ecommerce/LoginPage.ts`                        |
+| Web-first assertions (`expect(locator).toBeVisible()`) | every spec                                            |
+| Data-driven testing                                    | `tests/ecommerce/e2e/add_to_cart_data_driven.spec.ts` |
+| Network mocking                                        | `pages/airline/HomePage.ts` (`mockFlightSearchError`) |
+| Multi-tab handling                                     | `tests/.../new_tab.spec.ts`, airline tests            |
+| Native dialogs                                         | `tests/ecommerce/functional/alerts.spec.ts`           |
+| API testing                                            | `utils/UserApiHelper.ts`, airline API spec            |
+| Auth state caching                                     | `global-setup.ts`                                     |
+| Multi-environment config                               | `config/env.ts` + `config/.env.*`                     |
+| Multi-browser CI matrix                                | `.github/workflows/`, `.gitlab-ci.yml`                |
+| Allure reporting                                       | `utils/helpers/allure.ts`                             |
+| Code quality automation                                | `eslint.config.js`, `.husky/`, `lint-staged`          |
 
 ---
 

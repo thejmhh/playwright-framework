@@ -45,16 +45,16 @@
 
 ## Stack tecnológico
 
-| Capa | Herramienta |
-|---|---|
-| Test runner | [Playwright Test](https://playwright.dev/) 1.42 |
-| Lenguaje | TypeScript 5 (modo strict) |
-| Reportes | Allure + HTML (built-in) + JUnit (para CI) |
-| Calidad | ESLint 9 (flat config), Prettier 3, Husky 9, lint-staged 15 |
-| Configuración | dotenv, multi-env, multi-dominio |
-| CI/CD | GitHub Actions, GitLab CI |
-| APIs sandbox | [reqres.in](https://reqres.in) |
-| UIs sandbox | [saucedemo.com](https://www.saucedemo.com), [blazedemo.com](https://blazedemo.com) |
+| Capa          | Herramienta                                                                        |
+| ------------- | ---------------------------------------------------------------------------------- |
+| Test runner   | [Playwright Test](https://playwright.dev/) 1.42                                    |
+| Lenguaje      | TypeScript 5 (modo strict)                                                         |
+| Reportes      | Allure + HTML (built-in) + JUnit (para CI)                                         |
+| Calidad       | ESLint 9 (flat config), Prettier 3, Husky 9, lint-staged 15                        |
+| Configuración | dotenv, multi-env, multi-dominio                                                   |
+| CI/CD         | GitHub Actions, GitLab CI                                                          |
+| APIs sandbox  | [reqres.in](https://reqres.in)                                                     |
+| UIs sandbox   | [saucedemo.com](https://www.saucedemo.com), [blazedemo.com](https://blazedemo.com) |
 
 ---
 
@@ -158,12 +158,12 @@ npm run test:debug
 
 ### Variables de entorno útiles
 
-| Variable | Default | Descripción |
-|---|---|---|
-| `DOMAIN` | `ecommerce` | `ecommerce`, `airline` o `insurance` |
-| `ENV` | `qa` | Carga `config/.env.${ENV}` |
-| `HEADED` | sin valor | Pon `1` para desactivar headless |
-| `CI` | sin valor | Cuando está seteado, retries=2 y workers=50% |
+| Variable | Default     | Descripción                                  |
+| -------- | ----------- | -------------------------------------------- |
+| `DOMAIN` | `ecommerce` | `ecommerce`, `airline` o `insurance`         |
+| `ENV`    | `qa`        | Carga `config/.env.${ENV}`                   |
+| `HEADED` | sin valor   | Pon `1` para desactivar headless             |
+| `CI`     | sin valor   | Cuando está seteado, retries=2 y workers=50% |
 
 ---
 
@@ -205,8 +205,8 @@ Esto mantiene los archivos de test cortos (sin el boilerplate de
 El UI de login se ejercita una sola vez por corrida (en `global-setup.ts`) y
 el `storageState` resultante se reusa en cada spec que declare
 `test.use({ storageState: 'storage/standard.json' })`. Esto reduce
-significativamente el tiempo de la suite y aísla *el flujo de auth en sí
-mismo* en specs smoke dedicados que **no** usan el estado guardado.
+significativamente el tiempo de la suite y aísla _el flujo de auth en sí
+mismo_ en specs smoke dedicados que **no** usan el estado guardado.
 
 ### ¿Por qué fallar rápido si faltan env vars?
 
@@ -247,22 +247,22 @@ Playwright (`mcr.microsoft.com/playwright`) para el stage de test en GitLab.
 
 ## Habilidades demostradas
 
-| Capacidad | Dónde verla |
-|---|---|
-| Page Object Model | `pages/ecommerce/`, `pages/airline/` |
-| Fixtures personalizadas (DI) | `fixtures/*.ts` |
-| Locators web-first (`getByRole`, `getByPlaceholder`) | `pages/ecommerce/LoginPage.ts` |
-| Aserciones web-first (`expect(locator).toBeVisible()`) | todos los specs |
-| Pruebas data-driven | `tests/ecommerce/e2e/add_to_cart_data_driven.spec.ts` |
-| Mocking de red | `pages/airline/HomePage.ts` (`mockFlightSearchError`) |
-| Manejo multi-tab | `tests/.../new_tab.spec.ts`, tests airline |
-| Diálogos nativos | `tests/ecommerce/functional/alerts.spec.ts` |
-| Testing de API | `utils/UserApiHelper.ts`, spec airline de API |
-| Caché de estado de auth | `global-setup.ts` |
-| Configuración multi-ambiente | `config/env.ts` + `config/.env.*` |
-| Matriz CI multi-browser | `.github/workflows/`, `.gitlab-ci.yml` |
-| Reportes Allure | `utils/helpers/allure.ts` |
-| Automatización de calidad de código | `eslint.config.js`, `.husky/`, `lint-staged` |
+| Capacidad                                              | Dónde verla                                           |
+| ------------------------------------------------------ | ----------------------------------------------------- |
+| Page Object Model                                      | `pages/ecommerce/`, `pages/airline/`                  |
+| Fixtures personalizadas (DI)                           | `fixtures/*.ts`                                       |
+| Locators web-first (`getByRole`, `getByPlaceholder`)   | `pages/ecommerce/LoginPage.ts`                        |
+| Aserciones web-first (`expect(locator).toBeVisible()`) | todos los specs                                       |
+| Pruebas data-driven                                    | `tests/ecommerce/e2e/add_to_cart_data_driven.spec.ts` |
+| Mocking de red                                         | `pages/airline/HomePage.ts` (`mockFlightSearchError`) |
+| Manejo multi-tab                                       | `tests/.../new_tab.spec.ts`, tests airline            |
+| Diálogos nativos                                       | `tests/ecommerce/functional/alerts.spec.ts`           |
+| Testing de API                                         | `utils/UserApiHelper.ts`, spec airline de API         |
+| Caché de estado de auth                                | `global-setup.ts`                                     |
+| Configuración multi-ambiente                           | `config/env.ts` + `config/.env.*`                     |
+| Matriz CI multi-browser                                | `.github/workflows/`, `.gitlab-ci.yml`                |
+| Reportes Allure                                        | `utils/helpers/allure.ts`                             |
+| Automatización de calidad de código                    | `eslint.config.js`, `.husky/`, `lint-staged`          |
 
 ---
 
