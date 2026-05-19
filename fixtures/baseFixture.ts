@@ -3,8 +3,6 @@ import { test as base, expect } from '@playwright/test'
 /**
  * Base fixture shared by all domains.
  *
- * Add cross-cutting behavior here (e.g. fail tests on uncaught page errors,
- * inject auth headers globally, attach console logs to test output).
  */
 export const test = base.extend({
   page: async ({ page }, use) => {

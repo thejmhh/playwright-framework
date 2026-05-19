@@ -44,7 +44,6 @@ module.exports = [
   {
     files: ['tests/**/*.ts'],
     rules: {
-      // Tests can use console.log freely for debugging
       'no-console': 'off'
     }
   }

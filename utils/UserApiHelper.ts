@@ -1,16 +1,6 @@
 import { APIRequestContext, expect } from '@playwright/test'
 import { getAirlineEnv } from '../config/env'
 
-/**
- * API helper that targets reqres.in — a free public sandbox API.
- *
- * reqres.in is a stateless mock: POST /users responds 201 with a fake id and
- * createdAt timestamp. Useful for demonstrating API-driven test setup without
- * standing up a backend.
- *
- * In a real project, this class would target your actual service and the
- * baseURL/key would come from a secret store (CI variables, vault, etc.).
- */
 export class UserApiHelper {
   private readonly request: APIRequestContext
   private readonly baseURL: string
@@ -29,10 +19,6 @@ export class UserApiHelper {
     return h
   }
 
-  /**
-   * Creates a user via POST /users.
-   * Returns the generated user id (string) so tests can chain UI flows on it.
-   */
   async createUser(name: string, job: string): Promise<string> {
     const response = await this.request.post(`${this.baseURL}/users`, {
       headers: this.headers(),
@@ -46,9 +32,6 @@ export class UserApiHelper {
     return body.id
   }
 
-  /**
-   * Fetches a user via GET /users/:id. Used as a verification step.
-   */
   async getUserById(id: number): Promise<{ id: number; email: string; first_name: string }> {
     const response = await this.request.get(`${this.baseURL}/users/${id}`, {
       headers: this.headers()

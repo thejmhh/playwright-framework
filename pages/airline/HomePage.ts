@@ -17,7 +17,7 @@ export class HomePage {
 
   /**
    * Intercepts the form submission to /reserve.php and returns a 500 response
-   * with a synthetic "system down" page. Used to demo network mocking.
+   * with a synthetic "system down" page. This is used to demo network mocking.
    */
   async mockFlightSearchError() {
     await this.page.route('**/reserve.php', async (route) => {

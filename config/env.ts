@@ -7,8 +7,8 @@ import { getInsuranceConfig } from './domains/insurance.config'
 /**
  * Environment loader.
  *
- * ENV selects which .env file is loaded (default: 'qa').
- * each spec imports the config it needs explicitly via getEcommerceEnv() / getAirlineEnv().
+ * ENV selects which .env file is loaded.
+ * each spec imports the config it needs explicitly via getEcommerceEnv() or getAirlineEnv().
  */
 
 const ENV_NAME = process.env.ENV || 'qa'

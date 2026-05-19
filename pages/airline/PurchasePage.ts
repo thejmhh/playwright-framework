@@ -2,7 +2,7 @@ import { Page, Locator } from '@playwright/test'
 
 /**
  * Purchase page on blazedemo.com.
- * Real form fields: name, address, city, state, zip, card type, credit card #, ...
+ *
  */
 export class PurchasePage {
   readonly page: Page
